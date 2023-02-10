@@ -4,13 +4,13 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DummyConsumer;
 
-public static class MassTransitConfigurator
+internal static class MassTransitConfigurator
 {
     public static IServiceCollection ConfigureMassTransit(this IServiceCollection services, MassTransitConfiguration mtConfiguration) =>
         services.AddMassTransit(bus =>
         {
             bus.SetKebabCaseEndpointNameFormatter();
-            bus.AddConsumer<DummyMessageConsumer>();
+            bus.AddConsumer<DummyMessageConsumer, DummyMessageConsumerDefinition>();
 
             bus.UsingRabbitMq((ctx, rmq) =>
             {
@@ -19,7 +19,7 @@ public static class MassTransitConfigurator
                     h.Username(mtConfiguration.Username);
                     h.Password(mtConfiguration.Password);
                 });
-                rmq.ConfigureEndpoints(ctx, new KebabCaseEndpointNameFormatter("", false));
+                rmq.ConfigureEndpoints(ctx);
             });
         });
 }

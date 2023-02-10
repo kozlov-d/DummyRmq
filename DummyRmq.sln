@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DummyPublisher", "DummyPubl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DummyConsumer", "DummyConsumer\DummyConsumer.csproj", "{0708C5BC-87E9-4212-99D6-4EEC7DDC8795}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DummyPublisher.Infrastructure", "DummyPublisher.Infrastructure\DummyPublisher.Infrastructure.csproj", "{6E68CAB2-E3C7-4C47-B4CF-6F3DACA80810}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Release|x64 = Release|x64
@@ -23,6 +25,7 @@ Global
 		{98F96E62-A496-4D76-A952-4ACC65E3F60D} = {008B2784-1EBB-48AF-A993-425766FE4BC9}
 		{437F8B30-154D-4C90-914C-CE661A2CDF65} = {008B2784-1EBB-48AF-A993-425766FE4BC9}
 		{0708C5BC-87E9-4212-99D6-4EEC7DDC8795} = {008B2784-1EBB-48AF-A993-425766FE4BC9}
+		{6E68CAB2-E3C7-4C47-B4CF-6F3DACA80810} = {008B2784-1EBB-48AF-A993-425766FE4BC9}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{0708C5BC-87E9-4212-99D6-4EEC7DDC8795}.Release|x64.ActiveCfg = Release|x64
@@ -37,5 +40,9 @@ Global
 		{98F96E62-A496-4D76-A952-4ACC65E3F60D}.Release|x64.Build.0 = Release|x64
 		{98F96E62-A496-4D76-A952-4ACC65E3F60D}.Debug|x64.ActiveCfg = Debug|x64
 		{98F96E62-A496-4D76-A952-4ACC65E3F60D}.Debug|x64.Build.0 = Debug|x64
+		{6E68CAB2-E3C7-4C47-B4CF-6F3DACA80810}.Release|x64.ActiveCfg = Release|Any CPU
+		{6E68CAB2-E3C7-4C47-B4CF-6F3DACA80810}.Release|x64.Build.0 = Release|Any CPU
+		{6E68CAB2-E3C7-4C47-B4CF-6F3DACA80810}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6E68CAB2-E3C7-4C47-B4CF-6F3DACA80810}.Debug|x64.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal

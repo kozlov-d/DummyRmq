@@ -3,10 +3,10 @@ using MassTransit;
 
 namespace DummyPublisher;
 
-public sealed class DummyEventConsumer : IConsumer<DummyEvent>
+internal sealed class DummyEventConsumer : IConsumer<DummyEvent>
 {
     public Task Consume(ConsumeContext<DummyEvent> context)
     {
-        throw new NotImplementedException();
+        return Task.CompletedTask;
     }
 }

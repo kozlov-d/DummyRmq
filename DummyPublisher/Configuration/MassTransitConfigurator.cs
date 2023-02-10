@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DummyPublisher.Configuration;
 
-public static class MassTransitConfigurator
+internal static class MassTransitConfigurator
 {
     public static IServiceCollection ConfigureMassTransit(this IServiceCollection services, MassTransitConfiguration mtConfiguration) =>
         services.AddMassTransit(bus =>
@@ -19,7 +19,7 @@ public static class MassTransitConfigurator
                     h.Username(mtConfiguration.Username);
                     h.Password(mtConfiguration.Password);
                 });
-                rmq.ConfigureEndpoints(ctx, new KebabCaseEndpointNameFormatter("", false));
+                rmq.ConfigureEndpoints(ctx);
             });
         });
 }
