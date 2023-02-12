@@ -10,17 +10,22 @@ internal sealed class DummyMessageConsumer : IConsumer<DummyMessage>
     {
         Thread.Sleep(Random.Shared.Next(500, 1500));
 
-        var model = context.Message;
+        var message = context.Message;
 
-        await context.Publish(new DummyEvent(model.Guid, model.Fail));
+        if (message.Fail)
+            throw new CommandException("dummy exception");
+
+        await context.Publish(new DummyEvent(message.Guid, message.Fail));
     }
 }
 
 internal class DummyMessageConsumerDefinition : ConsumerDefinition<DummyMessageConsumer>
 {
-    public void Configure(IReceiveEndpointConfigurator endpointConfigurator, IConsumerConfigurator<DummyMessageConsumer> consumerConfigurator)
+    protected override void ConfigureConsumer(
+        IReceiveEndpointConfigurator endpointConfigurator,
+        IConsumerConfigurator<DummyMessageConsumer> consumerConfigurator)
     {
         endpointConfigurator.UseMessageRetry(r => r.Intervals(100, 100, 100));
-        endpointConfigurator.PrefetchCount = 1;
+        endpointConfigurator.PrefetchCount = 20;
     }
 }

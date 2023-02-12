@@ -1,13 +1,13 @@
 ﻿using System.Reflection;
+using DummyPublisher.Domain.Entities;
 using DummyPublisher.Infrastructure.EntityTypeConfigurations;
-using DummyRmq.Shared.Queues.Dummy;
 using Microsoft.EntityFrameworkCore;
 
 namespace DummyPublisher.Infrastructure;
 
 public class DummyContext : DbContext
 {
-    private DbSet<DummyMessage> DummyMessages { get; set; } = null!;
+    public DbSet<DummyEntity> DummyEntities { get; set; } = null!;
 
     public DummyContext(DbContextOptions<DummyContext> options)
         : base(options)
@@ -18,6 +18,6 @@ public class DummyContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetAssembly(typeof(DummyMessageConfiguration))!);
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetAssembly(typeof(DummyEntityConfiguration))!);
     }
 }

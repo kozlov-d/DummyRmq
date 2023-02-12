@@ -1,4 +1,6 @@
-﻿using DummyPublisher.Infrastructure;
+﻿using DummyPublisher.Domain.Entities;
+using DummyPublisher.Domain.Enums;
+using DummyPublisher.Infrastructure;
 using DummyRmq.Shared.Configurations;
 using DummyRmq.Shared.Queues.Dummy;
 using MassTransit;
@@ -23,12 +25,12 @@ internal class MessageSender : IMessageSender
     {
         var messages = GenerateMessages();
 
+        SaveMessages(messages);
+
         foreach (var message in messages)
         {
             await _publishEndpoint.Publish(message, ct);
         }
-
-        await SaveMessages(messages);
     }
 
     private IEnumerable<DummyMessage> GenerateMessages()
@@ -40,9 +42,17 @@ internal class MessageSender : IMessageSender
         }
     }
 
-    private async Task SaveMessages(IEnumerable<DummyMessage> messagesToSave)
+    private void SaveMessages(IEnumerable<DummyMessage> messagesToSave)
     {
-        _context.AddRange(messagesToSave);
-        await _context.SaveChangesAsync();
+        _context
+            .DummyEntities
+            .AddRange(messagesToSave
+                .Select(m => new DummyEntity
+                {
+                    Id = m.Guid,
+                    Status = Status.Failed
+                }));
+
+        _context.SaveChanges();
     }
 }

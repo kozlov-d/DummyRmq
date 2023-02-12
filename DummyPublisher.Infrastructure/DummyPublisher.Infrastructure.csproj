@@ -16,6 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\DummyPublisher.Domain\DummyPublisher.Domain.csproj" />
       <ProjectReference Include="..\DummyRmq.Shared\DummyRmq.Shared.csproj" />
     </ItemGroup>
 

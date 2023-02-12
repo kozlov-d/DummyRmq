@@ -13,10 +13,10 @@ public class JobsCreator : BackgroundService
         _scopeFactory = scopeFactory;
     }
 
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    protected override async Task ExecuteAsync(CancellationToken ct)
     {
         await using var scope = _scopeFactory.CreateAsyncScope();
         var messageSender = scope.ServiceProvider.GetRequiredService<IMessageSender>();
-        RecurringJob.AddOrUpdate("DummyJob", () => messageSender.SendMessages(stoppingToken), "*/30 * * * * *");
+        RecurringJob.AddOrUpdate("DummyJob", () => messageSender.SendMessages(ct), "*/30 * * * * *");
     }
 }
