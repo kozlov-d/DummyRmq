@@ -26,6 +26,5 @@ internal class DummyMessageConsumerDefinition : ConsumerDefinition<DummyMessageC
         IConsumerConfigurator<DummyMessageConsumer> consumerConfigurator)
     {
         endpointConfigurator.UseMessageRetry(r => r.Intervals(100, 100, 100));
-        endpointConfigurator.PrefetchCount = 20;
     }
 }
