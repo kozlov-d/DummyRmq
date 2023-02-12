@@ -23,9 +23,9 @@ internal class MessageSender : IMessageSender
 
     public async Task SendMessages(CancellationToken ct = default)
     {
-        var messages = GenerateMessages();
+        var messages = GenerateMessages().ToList();
 
-        SaveMessages(messages);
+        await SaveMessages(messages, ct);
 
         foreach (var message in messages)
         {
@@ -42,7 +42,7 @@ internal class MessageSender : IMessageSender
         }
     }
 
-    private void SaveMessages(IEnumerable<DummyMessage> messagesToSave)
+    private async Task SaveMessages(IEnumerable<DummyMessage> messagesToSave, CancellationToken ct)
     {
         _context
             .DummyEntities
@@ -53,6 +53,6 @@ internal class MessageSender : IMessageSender
                     Status = Status.Failed
                 }));
 
-        _context.SaveChanges();
+        await _context.SaveChangesAsync(ct);
     }
 }
