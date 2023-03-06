@@ -3,6 +3,7 @@ using System;
 using DummyPublisher.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DummyPublisher.Infrastructure.Migrations
 {
     [DbContext(typeof(DummyContext))]
-    partial class DummyContextModelSnapshot : ModelSnapshot
+    [Migration("20230306232636_StatusAsNullable")]
+    partial class StatusAsNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

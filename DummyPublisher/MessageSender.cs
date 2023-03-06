@@ -1,5 +1,4 @@
 ﻿using DummyPublisher.Domain.Entities;
-using DummyPublisher.Domain.Enums;
 using DummyPublisher.Infrastructure;
 using DummyRmq.Shared.Configurations;
 using DummyRmq.Shared.Queues.Dummy;
@@ -38,7 +37,7 @@ internal class MessageSender : IMessageSender
         foreach (var batchIndex in Enumerable.Range(0, _senderConfiguration.MessagesCount))
         {
             var fail = (double)Random.Shared.Next(0, 100) / 100 < 0.3;
-            yield return new DummyMessage(NewId.NextGuid(), batchIndex, fail);
+            yield return new DummyMessage(NewId.NextGuid(), batchIndex, fail, 0);
         }
     }
 
@@ -50,7 +49,7 @@ internal class MessageSender : IMessageSender
                 .Select(m => new DummyEntity
                 {
                     Id = m.Guid,
-                    Status = Status.Failed
+                    Status = null
                 }));
 
         await _context.SaveChangesAsync(ct);
